@@ -1,6 +1,6 @@
 defmodule Discuss.Mixfile do
   use Mix.Project
-
+  
   def project do
     [
       app: :discuss,
