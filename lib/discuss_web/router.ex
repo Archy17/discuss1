@@ -25,6 +25,11 @@ defmodule DiscussWeb.Router do
 
   end
 
+      
+     # pipeline :auth do
+     #  Ueberauth.plug "/auth"
+     # end
+
 
   scope "/auth", DiscussWeb do
     pipe_through :browser  
