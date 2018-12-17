@@ -1,7 +1,9 @@
 defmodule DiscussWeb.AuthController do
   use DiscussWeb, :controller
   plug Ueberauth
-  alias Discuss.Topic
+  #alias Discuss.Topic
+  alias Discuss.Topic.User
+  alias Discuss.Repo
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
     user_params = %{token: auth.credentials.token, email: auth.info.email, provider: "github"}
@@ -11,7 +13,17 @@ defmodule DiscussWeb.AuthController do
   end
 
   defp signin(conn, changeset) do
-    
+    case insert_or_update_user(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "Welcome back!")
+        |> put_flash(:user_id, user.id)
+        |> redirect(to: topic_path(conn, :index))
+      {:error, _reason} ->
+        conn
+        |> put_flash(:error, "Error signing in")
+        |> redirect(to: topic_path(conn, :index))
+    end
   end
 
   defp insert_or_update_user(changeset) do

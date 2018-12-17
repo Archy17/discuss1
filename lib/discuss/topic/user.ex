@@ -13,8 +13,10 @@ defmodule Discuss.Topic.User do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title])
-    |> validate_required([:title])
+     |> cast(params, [:email, :provider, :token])
+     |> validate_required([:email, :provider, :token])
+   # |> cast(params, [:title])
+   # |> validate_required([:title])
   end
 
 end
