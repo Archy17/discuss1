@@ -10,6 +10,7 @@ defmodule DiscussWeb.AuthController do
     changeset = User.changeset(%User{}, user_params)
 
     signin(conn, changeset)
+
   end
 
   defp signin(conn, changeset) do
