@@ -15,6 +15,6 @@ defmodule Discuss.Topic.Top do
     |> cast(params, [:title])
     |> validate_required([:title])
     
-  end
+   end
 
 end 
