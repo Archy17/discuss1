@@ -6,6 +6,7 @@ defmodule Discuss.Topic.Top do
 
   schema "topics" do
     field :title, :string
+    belongs_to :user, Discuss.Topic.User
 
   end
 
