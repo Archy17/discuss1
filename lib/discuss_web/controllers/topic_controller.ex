@@ -12,9 +12,13 @@ defmodule DiscussWeb.TopicController do
 
     topics = Discuss.Repo.all(Discuss.Topic.Top)
     render conn, "index.html", topics: topics 
-    
   end
 
+  def show(conn, %{"id" => topic_id}) do
+    topic = Discuss.Repo.get!(Top, topic_id)
+    render conn, "show.html", topic: topic
+  end 
+  
   def new(conn, _params) do 
      changeset = Top.changeset(%Top{}, %{})
 
@@ -82,6 +86,8 @@ defmodule DiscussWeb.TopicController do
       |> redirect(to: topic_path(conn, :index))
       |> halt()
     end
+
+  #nil.user_id()
 
   end
 
