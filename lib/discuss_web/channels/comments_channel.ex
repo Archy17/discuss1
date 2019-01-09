@@ -5,7 +5,7 @@ defmodule DiscussWeb.CommentsChannel do
   alias Discuss.Comment
 
   def join("comments:" <> topic_id, _params, socket) do
-    #IO.puts(name)  
+    IO.puts("++++++++++")  
     topic_id = String.to_integer(topic_id)
     topic = Repo.get(Top, topic_id)
 
@@ -16,7 +16,7 @@ defmodule DiscussWeb.CommentsChannel do
   #  IO.puts("++++")
   #  IO.puts(name)
   #  IO.inspect(message)
-    topic = socket.assign.topic.top
+    topic = socket.assigns.topic
 
     changeset = topic
       |> Ecto.build_assoc(:comments)
