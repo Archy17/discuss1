@@ -19,9 +19,10 @@ defmodule DiscussWeb.CommentsChannel do
   #  IO.puts(name)
   #  IO.inspect(message)
     topic = socket.assigns.topic
+   # user_id = socket.assigns.user_id
 
     changeset = topic
-      |> Ecto.build_assoc(:comments)
+      |> Ecto.build_assoc(:comments, user_id: socket.assigns.user_id)
       |> Comment.changeset(%{content: content})
 
 
