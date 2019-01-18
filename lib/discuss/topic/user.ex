@@ -3,6 +3,8 @@ defmodule Discuss.Topic.User do
   import Ecto.Changeset
  #alias
  
+  @derive {Poison.Encoder, only: [:email]}
+
   schema "users" do
     field :email, :string
     field :provider, :string

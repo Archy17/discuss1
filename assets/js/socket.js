@@ -57,8 +57,10 @@ socket.connect();
 
 const createSocket = (topicId) => {
   let channel = socket.channel(`comments:${topicId}`, {})
-  channel.join()
-    .receive('ok', resp => { 
+  channel
+  .join()
+    .receive('ok', resp => {
+        console.log(resp); 
     	renderComments(resp.comments);
     })
     .receive('error', resp => { 
@@ -91,10 +93,19 @@ function renderComment(event) {
 }
 
 function commentTemplate(comment) {
+  let email = 'Anonimous';
+  if (comment.user) {
+  	email = comment.user.email;
+  }
+
   return`
       <li class="collection-item">
         ${comment.content}
-      </li>`
+        <div class="secondary-content">
+          ${email}
+        </div>
+      </li>
+      `;
   }
 
 window.createSocket = createSocket;
